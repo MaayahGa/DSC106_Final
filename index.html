@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Clash Royale Data Dashboard</title>
+  <link rel="stylesheet" href="global.css" />
+
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Clash Royale Data Visualization</h1>
+    <p class="subtitle">Decks • Cards • Win Rates • Elixir Cycles</p>
+  </header>
+
+  <main>
+    <!-- Stats Section -->
+    <section id="info">
+      <h2>Miscellaneous Clash Royale Stats</h2>
+      <ul id="stats-list">
+        <li>🔥 Most popular card: <span id="popular-card">Loading...</span></li>
+        <li>⚡ Average elixir cost across meta decks: <span id="avg-elixir">Loading...</span></li>
+        <li>🏆 Highest global winrate card: <span id="winrate-card">Loading...</span></li>
+        <li>📊 Total number of unique cards: <span id="card-count">Loading...</span></li>
+      </ul>
+    </section>
+
+    <!-- Arena Journey Section -->
+    <section id="journey">
+      <h2>Season 18 Arena Journey</h2>
+      <div id="arena-container"></div>
+    </section>
+
+    <!-- Interactive Card Usage Chart -->
+    <section id="card-viz">
+      <h2>Least to Most Used Cards</h2>
+
+      <div id="chart"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Created by Gabriel • Powered by D3.js</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
