@@ -1,0 +1,103 @@
+team.card1.id,team.card1.name,card_type,elixir,rarity
+26000000,Knight,troop,3,Common
+26000001,Archers,troop,3,Common
+26000002,Goblins,troop,2,Common
+26000003,Giant,troop,5,Rare
+26000004,P.E.K.K.A,troop,7,Epic
+26000005,Minions,troop,3,Common
+26000006,Balloon,troop,5,Epic
+26000007,Witch,troop,5,Epic
+26000008,Barbarians,troop,5,Common
+26000009,Golem,troop,8,Epic
+26000010,Skeletons,troop,1,Common
+26000011,Valkyrie,troop,4,Rare
+26000012,Skeleton Army,troop,3,Epic
+26000013,Bomber,troop,3,Common
+26000014,Musketeer,troop,4,Rare
+26000015,Baby Dragon,troop,4,Epic
+26000016,Prince,troop,5,Epic
+26000017,Wizard,troop,5,Rare
+26000018,Mini P.E.K.K.A,troop,4,Rare
+26000019,Spear Goblins,troop,2,Common
+26000020,Giant Skeleton,troop,6,Epic
+26000021,Hog Rider,troop,4,Rare
+26000022,Minion Horde,troop,5,Common
+26000023,Ice Wizard,troop,3,Legendary
+26000024,Royal Giant,troop,6,Common
+26000025,Guards,troop,3,Epic
+26000026,Princess,troop,3,Legendary
+26000027,Dark Prince,troop,4,Epic
+26000028,Three Musketeers,troop,9,Rare
+26000029,Lava Hound,troop,7,Legendary
+26000030,Ice Spirit,troop,1,Common
+26000031,Fire Spirits,troop,2,Common
+26000032,Miner,troop,3,Legendary
+26000033,Sparky,troop,6,Legendary
+26000034,Bowler,troop,5,Epic
+26000035,Lumberjack,troop,4,Legendary
+26000036,Battle Ram,troop,4,Rare
+26000037,Inferno Dragon,troop,4,Legendary
+26000038,Ice Golem,troop,2,Rare
+26000039,Mega Minion,troop,3,Rare
+26000040,Dart Goblin,troop,3,Rare
+26000041,Goblin Gang,troop,3,Common
+26000042,Electro Wizard,troop,4,Legendary
+26000043,Elite Barbarians,troop,6,Common
+26000044,Hunter,troop,4,Epic
+26000045,Executioner,troop,5,Epic
+26000046,Bandit,troop,3,Legendary
+26000047,Royal Recruits,troop,7,Common
+26000048,Night Witch,troop,4,Legendary
+26000049,Bats,troop,2,Common
+26000050,Royal Ghost,troop,3,Legendary
+26000051,Ram Rider,troop,5,Legendary
+26000052,Zappies,troop,4,Rare
+26000053,Rascals,troop,5,Common
+26000054,Cannon Cart,troop,5,Epic
+26000055,Mega Knight,troop,7,Legendary
+26000056,Skeleton Barrel,troop,3,Common
+26000057,Flying Machine,troop,4,Rare
+26000058,Wall Breakers,troop,2,Epic
+26000059,Royal Hogs,troop,5,Rare
+26000060,Goblin Giant,troop,6,Epic
+26000061,Fisherman,troop,3,Legendary
+26000062,Magic Archer,troop,4,Legendary
+26000063,Electro Dragon,troop,5,Epic
+26000064,Firecracker,troop,3,Common
+26000067,Elixir Golem,troop,3,Rare
+26000068,Battle Healer,troop,4,Rare
+26000080,Skeleton Dragons,troop,4,Common
+26000083,Mother Witch,troop,4,Legendary
+26000084,Electro Spirit,troop,1,Common
+26000085,Electro Giant,troop,8,Epic
+27000000,Cannon,buildings,3,Common
+27000001,Goblin Hut,buildings,5,Rare
+27000002,Mortar,buildings,4,Common
+27000003,Inferno Tower,buildings,5,Rare
+27000004,Bomb Tower,buildings,4,Rare
+27000005,Barbarian Hut,buildings,7,Rare
+27000006,Tesla,buildings,4,Rare
+27000007,Elixir Collector,buildings,6,Rare
+27000008,X-Bow,buildings,6,Epic
+27000009,Tombstone,buildings,3,Rare
+27000010,Furnace,buildings,4,Rare
+27000012,Goblin Cage,buildings,4,Rare
+28000000,Fireball,spell,4,Rare
+28000001,Arrows,spell,3,Common
+28000002,Rage,spell,2,Epic
+28000003,Rocket,spell,6,Rare
+28000004,Goblin Barrel,spell,3,Epic
+28000005,Freeze,spell,4,Epic
+28000006,Mirror,spell,1,Epic
+28000007,Lightning,spell,6,Epic
+28000008,Zap,spell,2,Common
+28000009,Poison,spell,4,Epic
+28000010,Graveyard,spell,5,Legendary
+28000011,The Log,spell,2,Legendary
+28000012,Tornado,spell,3,Epic
+28000013,Clone,spell,3,Epic
+28000014,Earthquake,spell,3,Rare
+28000015,Barbarian Barrel,spell,2,Epic
+28000016,Heal Spirit,spell,1,Rare
+28000017,Giant Snowball,spell,2,Common
+28000018,Royal Delivery,spell,3,Common
