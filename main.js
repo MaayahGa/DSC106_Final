@@ -52,7 +52,7 @@ arenas.forEach(arena => {
   div.className = "arena-card";
   div.innerHTML = `
     <h3>${arena.name}</h3>
-    <p class="trophies">Trophies: ${arena.trophies}</p>
+    <p class="trophies">Trophies: ${arena.min}</p>
     <div class="arena-image">
       <img src="${arena.img}" alt="${arena.name} image" />
     </div>
