@@ -40,6 +40,23 @@
       <div id="chart"></div>
     </section>
   </main>
+  <section id="writeup">
+    <h2>write-up</h2>
+    <h3>What have we done so far?</h3>
+    <p>
+      We found a group of datasets on kaggle containing information on tens of thousands of Clash Royale battles for this project.
+      We have done some data cleaning with these datasets, including concating datasets from different dates, merging dataset of battles
+      and cards, dropping irrelavent columns. We then developed this simple webpage template, where the journey section is intended
+      to show the stats of battles in different arenas and the bar chart is to show the use rate of cards. We also have implemented
+      a interaction so that users can filter the cards usage data in the bar chart by clicking on arenas.
+    </p>
+    <h3>What will be the most challenging of our project to design and why?</h3>
+    <p>
+      The most challenging is the size of the datasets we use. We have ten datasets, each contains information of around 3,000,000 battles during
+      one certain day, and the entire package is over 22 GB. Running codes to concate datasets of this size will cause memory errors.
+      To fix this issue, we decide to randomly select 1/10 of the rows from each dataset so the overall size is reduced.
+    </p>
+  </section>
 
   <footer>
     <p>Created by Gabriel • Powered by D3.js</p>
