@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clash Royale — Season 18 Storytelling (Slides)</title>
+</head>
+<body>
+  <!-- Top-level container for the storytelling slides -->
+  <main id="storytelling-app" aria-roledescription="slideshow" tabindex="0">
+
+    <!-- Metadata / JSON used by your JS to populate charts (you can replace values) -->
+    <!--
+      Structure explanation:
+        - bins: the two groups used in the proposition
+        - cards: every card referenced, id + displayName
+        - arenas: arena list in order (slides 3-7). Each arena may have card availability
+          in `availability`, mapping card id -> boolean (true = available in that arena).
+          Fill availability from your dataset in JS or replace here with concrete booleans.
+    -->
+    <script id="cr-data" type="application/json">
+    {
+      "season":"Season 18",
+      "proposition":"In Season 18 ladder, as arena goes up, the main factor that leads to victory shifts from 'toxic troop' → 'cheap spell'",
+      "bins": {
+        "toxic_troop": {
+          "label":"Toxic Troop",
+          "cards":["skeleton_army","wizard","valkyrie","mega_knight"]
+        },
+        "cheap_spell": {
+          "label":"Cheap Spell",
+          "cards":["log","zap","barbarian_barrel"]
+        }
+      },
+      "cards": {
+        "skeleton_army":{"id":"skeleton_army","displayName":"Skeleton Army"},
+        "wizard":{"id":"wizard","displayName":"Wizard"},
+        "valkyrie":{"id":"valkyrie","displayName":"Valkyrie"},
+        "mega_knight":{"id":"mega_knight","displayName":"Mega Knight"},
+        "log":{"id":"log","displayName":"The Log"},
+        "zap":{"id":"zap","displayName":"Zap"},
+        "barbarian_barrel":{"id":"barbarian_barrel","displayName":"Barbarian Barrel"}
+      },
+      "arenas": [
+        {"id":"spooky_town","displayName":"Spooky Town","slideIndex":3, "availability": {}},
+        {"id":"rascals_hideout","displayName":"Rascal's Hideout","slideIndex":4, "availability": {}},
+        {"id":"serenity_peak","displayName":"Serenity Peak","slideIndex":5, "availability": {}},
+        {"id":"miners_mine","displayName":"Miner's Mine","slideIndex":6, "availability": {}},
+        {"id":"legendary","displayName":"Legendary Arena","slideIndex":7, "availability": {}}
+      ]
+    }
+    </script>
+
+    <!-- Slide container - each .slide is a screen -->
+    <div id="slides" class="slides" aria-live="polite">
+
+      <!-- Slide 1: Introduction -->
+      <section id="slide-1" class="slide" data-index="1" role="group" aria-label="Introduction">
+        <header class="slide-header">
+          <h1>Proposition — Season 18 Ladder</h1>
+          <p class="proposition">
+            <strong>Proposition:</strong>
+            "In Season 18 ladder, as arena goes up, the main factor that leads to victory shifts from
+            <em>toxic troop</em> → <em>cheap spell</em>"
+          </p>
+          <p class="note-small">
+            Story bins:
+            <strong>toxic troop</strong>: Skeleton Army, Wizard, Valkyrie, Mega Knight
+            &nbsp;|&nbsp;
+            <strong>cheap spell</strong>: The Log, Zap, Barbarian Barrel
+          </p>
+        </header>
+
+        <article class="slide-body">
+          <section class="intro-paragraph">
+            <p>
+              This short storytelling deck walks through evidence from community posts/videos and
+              season-18 ladder data across five arena bins. Slides 3–7 compare the two bins in each arena
+              using a bar chart of the indicator "<em># win</em>" (a combined measure of win rate &amp; use rate).
+            </p>
+
+            <p class="interaction-ux">
+              Interaction notes for implementer:
+              <ul>
+                <li>Slide 1–2 navigation: change slide by <strong>pulling down the page</strong> (mobile gesture).
+                Implement detection in JS (touch / wheel / pointer events).</li>
+                <li>Slides 3–7 navigation: switch slides by clicking arena icons in the arena nav bar at bottom.</li>
+                <li>When rendering each arena's chart, exclude cards unavailable in that arena using the <code>availability</code> map in the JSON above.</li>
+              </ul>
+            </p>
+          </section>
+        </article>
+
+        <footer class="slide-footer">
+          <p class="hint">Pull down to go to the evidence slide.</p>
+        </footer>
+      </section>
+
+      <!-- Slide 2: Posts / video evidence for "toxic troop" -->
+      <section id="slide-2" class="slide" data-index="2" role="group" aria-label="Evidence for toxic troop">
+        <header class="slide-header">
+          <h2>Community Evidence — "Toxic Troop"</h2>
+          <p>Curated posts / videos that highlight the impact of toxic troops in Season 18 ladder.</p>
+        </header>
+
+        <article class="slide-body">
+          <!-- Placeholder list that your JS can populate with fetched or pre-provided posts/videos -->
+          <ol id="evidence-list" class="evidence-list" aria-live="polite">
+            <!-- Example item structure (replace/populate via JS):
+              <li class="evidence-item" data-type="video" data-url="...">
+                <h3>Title or short quote</h3>
+                <p>Short description / why this supports the proposition.</p>
+                <div class="embed-placeholder" data-embed-url="..."></div>
+              </li>
+            -->
+            <li class="evidence-item placeholder">
+              <!-- your JS should replace placeholders with real embeds -->
+              <h3>Video / Post 1 — (placeholder)</h3>
+              <p class="small">Replace this placeholder with embedded video or post markup.</p>
+            </li>
+            <li class="evidence-item placeholder">
+              <h3>Video / Post 2 — (placeholder)</h3>
+              <p class="small">Replace this placeholder with embedded video or post markup.</p>
+            </li>
+          </ol>
+        </article>
+
+        <footer class="slide-footer">
+          <p class="hint">Pull down again or use your navigation gesture to reach arena comparisons.</p>
+        </footer>
+      </section>
+
+      <!-- Slides 3 - 7: Arena-specific comparisons
+           Each slide contains:
+             - arena heading
+             - chart container (JS will draw the bar chart here)
+             - legend (colors for bins)
+             - mean lines explanation
+      -->
+      <!-- Repeat pattern for each arena from JSON; IDs match arena ids -->
+      <section id="slide-spooky_town" class="slide arena-slide" data-index="3" role="group" aria-label="Spooky Town">
+        <header class="slide-header">
+          <h2>Spooky Town — Bin comparison</h2>
+          <p class="small">Compare "<em>Toxic Troop</em>" vs "<em>Cheap Spell</em>" — show # win per card.</p>
+        </header>
+
+        <article class="slide-body">
+          <!-- Chart area: your JS should render a bar chart here (e.g. D3/Chart.js).
+               Provide clear targets for JS: #chart-spooky_town and #chart-spooky_town-legend -->
+          <div id="chart-spooky_town" class="chart-canvas" role="img" aria-label="Bar chart for Spooky Town">
+            <!-- JS will create SVG/canvas inside this div. -->
+          </div>
+
+          <!-- Legend -->
+          <div id="chart-spooky_town-legend" class="chart-legend" aria-hidden="false">
+            <span class="legend-item" data-bin="toxic_troop">● Toxic Troop</span>
+            <span class="legend-item" data-bin="cheap_spell">● Cheap Spell</span>
+            <div class="mean-lines-note">
+              <small>
+                Two horizontal lines indicate mean #win for each bin:
+                <em>one for Toxic Troop</em>, <em>one for Cheap Spell</em>.
+                Cards not available in this arena should be excluded from the chart.
+              </small>
+            </div>
+          </div>
+
+          <!-- Data table fallback (optional) -->
+          <div id="table-spooky_town" class="chart-table" hidden>
+            <!-- JS may populate a small table for accessibility fallback -->
+          </div>
+        </article>
+
+      </section>
+
+      <section id="slide-rascals_hideout" class="slide arena-slide" data-index="4" role="group" aria-label="Rascal's Hideout">
+        <header class="slide-header">
+          <h2>Rascal's Hideout — Bin comparison</h2>
+        </header>
+
+        <article class="slide-body">
+          <div id="chart-rascals_hideout" class="chart-canvas" role="img" aria-label="Bar chart for Rascal's Hideout"></div>
+          <div id="chart-rascals_hideout-legend" class="chart-legend">
+            <span class="legend-item" data-bin="toxic_troop">● Toxic Troop</span>
+            <span class="legend-item" data-bin="cheap_spell">● Cheap Spell</span>
+            <div class="mean-lines-note"><small>Two mean lines: mean #win Cheap Spell vs mean #win Toxic Troop.</small></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="slide-serenity_peak" class="slide arena-slide" data-index="5" role="group" aria-label="Serenity Peak">
+        <header class="slide-header"><h2>Serenity Peak — Bin comparison</h2></header>
+        <article class="slide-body">
+          <div id="chart-serenity_peak" class="chart-canvas" role="img" aria-label="Bar chart for Serenity Peak"></div>
+          <div id="chart-serenity_peak-legend" class="chart-legend">
+            <span class="legend-item" data-bin="toxic_troop">● Toxic Troop</span>
+            <span class="legend-item" data-bin="cheap_spell">● Cheap Spell</span>
+            <div class="mean-lines-note"><small>Two mean lines: mean #win Cheap Spell vs mean #win Toxic Troop.</small></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="slide-miners_mine" class="slide arena-slide" data-index="6" role="group" aria-label="Miner's Mine">
+        <header class="slide-header"><h2>Miner's Mine — Bin comparison</h2></header>
+        <article class="slide-body">
+          <div id="chart-miners_mine" class="chart-canvas" role="img" aria-label="Bar chart for Miner's Mine"></div>
+          <div id="chart-miners_mine-legend" class="chart-legend">
+            <span class="legend-item" data-bin="toxic_troop">● Toxic Troop</span>
+            <span class="legend-item" data-bin="cheap_spell">● Cheap Spell</span>
+            <div class="mean-lines-note"><small>Two mean lines: mean #win Cheap Spell vs mean #win Toxic Troop.</small></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="slide-legendary" class="slide arena-slide" data-index="7" role="group" aria-label="Legendary Arena">
+        <header class="slide-header"><h2>Legendary Arena — Bin comparison</h2></header>
+        <article class="slide-body">
+          <div id="chart-legendary" class="chart-canvas" role="img" aria-label="Bar chart for Legendary Arena"></div>
+          <div id="chart-legendary-legend" class="chart-legend">
+            <span class="legend-item" data-bin="toxic_troop">● Toxic Troop</span>
+            <span class="legend-item" data-bin="cheap_spell">● Cheap Spell</span>
+            <div class="mean-lines-note"><small>Two mean lines: mean #win Cheap Spell vs mean #win Toxic Troop.</small></div>
+          </div>
+        </article>
+      </section>
+
+    </div> <!-- end #slides -->
+
+    <!-- Arena nav (shown on slides 3-7) -->
+    <nav id="arena-nav" class="arena-nav" aria-label="Arena navigation" role="navigation">
+      <!-- Each button should activate the corresponding arena slide when clicked.
+           Use attributes: data-target = slide id. Provide an accessible label.
+           Replace image src with your icons. -->
+      <button class="arena-btn" data-target="slide-spooky_town" aria-label="Spooky Town">
+        <img src="images/spooky-town.png" alt="" class="arena-icon" />
+        <span class="arena-name">Spooky Town</span>
+      </button>
+
+      <button class="arena-btn" data-target="slide-rascals_hideout" aria-label="Rascal's Hideout">
+        <img src="images/rascals-hideout.png" alt="" class="arena-icon" />
+        <span class="arena-name">Rascal's</span>
+      </button>
+
+      <button class="arena-btn" data-target="slide-serenity_peak" aria-label="Serenity Peak">
+        <img src="images/serenity-peak.png" alt="" class="arena-icon" />
+        <span class="arena-name">Serenity Peak</span>
+      </button>
+
+      <button class="arena-btn" data-target="slide-miners_mine" aria-label="Miner's Mine">
+        <img src="images/miners-mine.png" alt="" class="arena-icon" />
+        <span class="arena-name">Miner's Mine</span>
+      </button>
+
+      <button class="arena-btn" data-target="slide-legendary" aria-label="Legendary Arena">
+        <img src="images/legendary.png" alt="" class="arena-icon" />
+        <span class="arena-name">Legendary</span>
+      </button>
+    </nav>
+
+    <!-- Hidden accessibility controls (keyboard) -->
+    <div id="controls" class="visually-hidden" aria-hidden="true">
+      <!-- Implement keyboard interactions in your JS:
+           - ArrowDown / PageDown: next slide (for pull-down equivalence)
+           - ArrowUp / PageUp: previous slide
+           - Number keys 1-7 to jump
+      -->
+    </div>
+
+  </main>
+
+  <!-- Developer notes (do not remove) -->
+  <!--
+    Implementation checklist for JS:
+    1. Load JSON from #cr-data (document.getElementById('cr-data').textContent -> JSON.parse).
+    2. For each arena slide:
+       - Filter cards by availability (arena.availability[cardId] === true).
+       - Compute #win for each card from your dataset (useRate * winRate or other metric).
+       - Draw bar chart with:
+           x-axis: card names (only available ones)
+           y-axis: #win (numeric)
+           colored bars: toxic_troop color vs cheap_spell color (use class/data-bin)
+           horizontal mean lines: mean #win across cards in each bin (computed using only available cards)
+       - Add accessible table fallback in #table-<arenaId> if needed.
+    3. Navigation:
+       - Slide 1-2: gesture (pull-down) -> switch slide.
+       - Slide 3-7: arena nav click -> show corresponding slide; ensure focus management for a11y.
+    4. Make sure to hide cards that are not available in a given arena.
+    5. Make legend interactive (optional): clicking a legend item toggles visibility of that bin.
+  -->
+
+</body>
+</html>
