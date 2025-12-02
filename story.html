@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Quiet Winners vs “Toxic” Cards · Clash Royale Season 18</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Fonts (optional, adjust if you like) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main stylesheet for the project -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="app" class="app">
+      <!-- Header stays visible while you click through slides -->
+      <header class="site-header">
+        <div class="site-header-text">
+          <p class="site-kicker">UCSD · DSC 106 Final Project</p>
+          <h1 class="site-title">
+            The quiet winners of Clash Royale Season 18
+          </h1>
+          <p class="site-subtitle">
+            Players complain about “toxic” troops — but the cards that quietly
+            win ladder games are often cheap spells and support cards.
+          </p>
+        </div>
+
+        <!-- Simple nav that can jump to specific slides if you wire it up in story.js -->
+        <nav class="site-nav" aria-label="Story navigation">
+          <button class="nav-link" data-target-slide="0">Intro</button>
+          <button class="nav-link" data-target-slide="1">Complaints</button>
+          <button class="nav-link" data-target-slide="2">Spooky Town</button>
+          <button class="nav-link" data-target-slide="3">
+            Rascal’s Hideout
+          </button>
+          <button class="nav-link" data-target-slide="4">Serenity Peak</button>
+          <button class="nav-link" data-target-slide="5">
+            Legendary Arena
+          </button>
+          <button class="nav-link" data-target-slide="6">Summary</button>
+          <button
+            class="nav-link nav-link--highlight"
+            data-target-slide="7"
+          >
+            Explore the data
+          </button>
+        </nav>
+      </header>
+
+      <!-- Main slideshow: each section is one discrete “page”. -->
+      <!-- story.js will handle click-to-advance behaviour using these containers. -->
+      <main
+        id="slides"
+        class="slides"
+        aria-live="polite"
+        aria-label="Story slides"
+      >
+        <!-- Slide 0: Proposition / setup -->
+        <section
+          id="slide-0"
+          class="slide is-active"
+          data-slide-index="0"
+        >
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">Proposition</h2>
+              <p>
+                In the Season 18 ladder, as players climb from mid to high
+                arenas, the cards that win most often aren’t the “toxic” troop
+                cards players complain about. Instead, quiet support cards like
+                cheap spells show up in a huge share of winning decks.
+              </p>
+              <p>
+                We’ll walk through a short story, one arena at a time, and then
+                let you explore the full dataset yourself.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 1: Community complaints / social posts -->
+        <section id="slide-1" class="slide" data-slide-index="1">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">What players call “toxic”</h2>
+              <p>
+                If you scroll through Reddit, Twitter or YouTube, people point
+                fingers at familiar “toxic” cards — things like Little Prince,
+                Firecracker or Royal Recruits — and blame them for unfair
+                games.
+              </p>
+              <p>
+                On this slide, you can show a couple of screenshots or quotes
+                from posts that inspired our question: <em>are these really the
+                cards that win the most on ladder?</em>
+              </p>
+            </div>
+            <div class="slide-media" id="slide-1-media">
+              <!-- Optional: place images of posts here -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2: Spooky Town (first arena example) -->
+        <section id="slide-2" class="slide" data-slide-index="2">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">Spooky Town: toxic troops really dominate</h2>
+              <p>
+                In lower arenas like Spooky Town, the cards people complain
+                about <strong>do</strong> line up with what wins. Many of the
+                top cards by wins are splashy, frustrating troops.
+              </p>
+              <p>
+                The chart on the right compares “toxic troops” to “cheap
+                spells” by total wins for this arena only.
+              </p>
+            </div>
+            <div class="slide-chart">
+              <!-- story.js will render a bar chart into this container -->
+              <div
+                id="chart-spooky-town"
+                class="chart chart--arena"
+                data-arena="Spooky Town"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 3: Rascal’s Hideout -->
+        <section id="slide-3" class="slide" data-slide-index="3">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">Rascal’s Hideout: the gap starts to close</h2>
+              <p>
+                As we move up to Rascal’s Hideout, the “toxic” troop cards are
+                still strong — but quiet support cards begin to show up more
+                often in winning decks.
+              </p>
+              <p>
+                Watch how the mean line for cheap spells starts to creep up
+                toward the toxic troop line.
+              </p>
+            </div>
+            <div class="slide-chart">
+              <div
+                id="chart-rascals-hideout"
+                class="chart chart--arena"
+                data-arena="Rascal's Hideout"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 4: Serenity Peak -->
+        <section id="slide-4" class="slide" data-slide-index="4">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">Serenity Peak: support cards catch up</h2>
+              <p>
+                At Serenity Peak, cheap spells and other support cards are no
+                longer background characters. Their average wins can match — or
+                even exceed — some of the most complained-about troops.
+              </p>
+              <p>
+                This slide is a second mid-ladder checkpoint before we jump to
+                top arena.
+              </p>
+            </div>
+            <div class="slide-chart">
+              <div
+                id="chart-serenity-peak"
+                class="chart chart--arena"
+                data-arena="Serenity Peak"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 5: Legendary Arena -->
+        <section id="slide-5" class="slide" data-slide-index="5">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">Legendary Arena: quiet winners on top</h2>
+              <p>
+                By the time we reach Legendary Arena, the story flips. Quiet
+                support cards and cheap spells show up in a huge share of
+                winning decks, and their average wins can beat out many “toxic”
+                troops.
+              </p>
+              <p>
+                This is the main evidence for our proposition: at higher arenas,
+                <strong>support cards matter more than the loud complaints
+                suggest</strong>.
+              </p>
+            </div>
+            <div class="slide-chart">
+              <div
+                id="chart-legendary-arena"
+                class="chart chart--arena"
+                data-arena="Legendary Arena"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 6: Summary / takeaway -->
+        <section id="slide-6" class="slide" data-slide-index="6">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <h2 class="slide-heading">So what actually wins ladder games?</h2>
+              <p>
+                Across arenas, toxic troops are visible and memorable — they
+                create the moments people complain about. But in higher arenas,
+                the cards that quietly drive wins are often cheap spells and
+                support cards that show up again and again in successful decks.
+              </p>
+              <p>
+                Now it’s your turn. On the next page you can choose any card,
+                any arena and any metric, and see where your favorite “toxic”
+                cards actually rank.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 7: Data explorer -->
+        <section
+          id="slide-7"
+          class="slide slide--explorer"
+          data-slide-index="7"
+        >
+          <div class="slide-inner">
+            <div class="slide-text slide-text--explorer">
+              <h2 class="slide-heading">Explore the Season 18 ladder data</h2>
+              <p>
+                Build your own comparison between “toxic” troops and quiet
+                support cards. Search for specific cards, adjust filters, and
+                change which metric you use to define “strength”.
+              </p>
+            </div>
+
+            <!-- Controls + chart containers that explore.js will fill -->
+            <div class="explorer-layout">
+              <div id="explorer-controls" class="explorer-controls">
+                <!--
+                  explore.js will add:
+                  - card search box
+                  - buttons to add cards to each bin
+                  - filters for arena, elixir, rarity, type
+                  - metric selector (#wins, win rate, etc.)
+                -->
+              </div>
+
+              <div id="explorer-chart" class="explorer-chart">
+                <!-- explore.js renders the interactive chart here -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Click / tap hint (like the gunshot example) -->
+      <div class="click-advance-hint" aria-hidden="true">
+        <span class="click-advance-label">Click / tap to advance</span>
+      </div>
+
+      <footer class="site-footer">
+        <p class="footer-text">
+          Built for DSC 106 · Clash Royale Season 18 ladder data.
+        </p>
+      </footer>
+    </div>
+
+    <!-- JS libraries and project scripts -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="common.js"></script>
+    <script src="story.js"></script>
+    <script src="explore.js"></script>
+  </body>
+</html>
