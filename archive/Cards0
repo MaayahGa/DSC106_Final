@@ -1,0 +1,103 @@
+team.card1.id,team.card1.name,card_type,elixir,rarity,count
+26000000,Knight,troop,3,Common,24614.0
+26000001,Archers,troop,3,Common,8373.0
+26000002,Goblins,troop,2,Common,1511.0
+26000003,Giant,troop,5,Rare,5000.0
+26000004,P.E.K.K.A,troop,7,Epic,22460.0
+26000005,Minions,troop,3,Common,13873.0
+26000006,Balloon,troop,5,Epic,33696.0
+26000007,Witch,troop,5,Epic,44068.0
+26000008,Barbarians,troop,5,Common,6660.0
+26000009,Golem,troop,8,Epic,8961.0
+26000010,Skeletons,troop,1,Common,9578.0
+26000011,Valkyrie,troop,4,Rare,49954.0
+26000012,Skeleton Army,troop,3,Epic,81494.0
+26000013,Bomber,troop,3,Common,14948.0
+26000014,Musketeer,troop,4,Rare,15981.0
+26000015,Baby Dragon,troop,4,Epic,43856.0
+26000016,Prince,troop,5,Epic,30336.0
+26000017,Wizard,troop,5,Rare,64189.0
+26000018,Mini P.E.K.K.A,troop,4,Rare,24689.0
+26000019,Spear Goblins,troop,2,Common,7593.0
+26000020,Giant Skeleton,troop,6,Epic,21036.0
+26000021,Hog Rider,troop,4,Rare,27152.0
+26000022,Minion Horde,troop,5,Common,26960.0
+26000023,Ice Wizard,troop,3,Legendary,23588.0
+26000024,Royal Giant,troop,6,Common,4960.0
+26000025,Guards,troop,3,Epic,6127.0
+26000026,Princess,troop,3,Legendary,35323.0
+26000027,Dark Prince,troop,4,Epic,17511.0
+26000028,Three Musketeers,troop,9,Rare,836.0
+26000029,Lava Hound,troop,7,Legendary,3273.0
+26000030,Ice Spirit,troop,1,Common,10858.0
+26000031,Fire Spirits,troop,2,Common,8979.0
+26000032,Miner,troop,3,Legendary,18318.0
+26000033,Sparky,troop,6,Legendary,19170.0
+26000034,Bowler,troop,5,Epic,4061.0
+26000035,Lumberjack,troop,4,Legendary,31436.0
+26000036,Battle Ram,troop,4,Rare,3180.0
+26000037,Inferno Dragon,troop,4,Legendary,41916.0
+26000038,Ice Golem,troop,2,Rare,7580.0
+26000039,Mega Minion,troop,3,Rare,6509.0
+26000040,Dart Goblin,troop,3,Rare,6551.0
+26000041,Goblin Gang,troop,3,Common,14796.0
+26000042,Electro Wizard,troop,4,Legendary,45722.0
+26000043,Elite Barbarians,troop,6,Common,9665.0
+26000044,Hunter,troop,4,Epic,16007.0
+26000045,Executioner,troop,5,Epic,22657.0
+26000046,Bandit,troop,3,Legendary,29688.0
+26000047,Royal Recruits,troop,7,Common,1422.0
+26000048,Night Witch,troop,4,Legendary,11447.0
+26000049,Bats,troop,2,Common,25296.0
+26000050,Royal Ghost,troop,3,Legendary,11456.0
+26000051,Ram Rider,troop,5,Legendary,19928.0
+26000052,Zappies,troop,4,Rare,3148.0
+26000053,Rascals,troop,5,Common,1124.0
+26000054,Cannon Cart,troop,5,Epic,2337.0
+26000055,Mega Knight,troop,7,Legendary,67967.0
+26000056,Skeleton Barrel,troop,3,Common,6740.0
+26000057,Flying Machine,troop,4,Rare,1480.0
+26000058,Wall Breakers,troop,2,Epic,6213.0
+26000059,Royal Hogs,troop,5,Rare,5193.0
+26000060,Goblin Giant,troop,6,Epic,1253.0
+26000061,Fisherman,troop,3,Legendary,10152.0
+26000062,Magic Archer,troop,4,Legendary,42135.0
+26000063,Electro Dragon,troop,5,Epic,6504.0
+26000064,Firecracker,troop,3,Common,13239.0
+26000067,Elixir Golem,troop,3,Rare,6511.0
+26000068,Battle Healer,troop,4,Rare,1961.0
+26000080,Skeleton Dragons,troop,4,Common,2863.0
+26000083,Mother Witch,troop,4,Legendary,6955.0
+26000084,Electro Spirit,troop,1,Common,2199.0
+26000085,Electro Giant,troop,8,Epic,11830.0
+27000000,Cannon,buildings,3,Common,4051.0
+27000001,Goblin Hut,buildings,5,Rare,3755.0
+27000002,Mortar,buildings,4,Common,1115.0
+27000003,Inferno Tower,buildings,5,Rare,17327.0
+27000004,Bomb Tower,buildings,4,Rare,3890.0
+27000005,Barbarian Hut,buildings,7,Rare,877.0
+27000006,Tesla,buildings,4,Rare,8162.0
+27000007,Elixir Collector,buildings,6,Rare,1670.0
+27000008,X-Bow,buildings,6,Epic,3558.0
+27000009,Tombstone,buildings,3,Rare,2575.0
+27000010,Furnace,buildings,4,Rare,4342.0
+27000012,Goblin Cage,buildings,4,Rare,2328.0
+28000000,Fireball,spell,4,Rare,32745.0
+28000001,Arrows,spell,3,Common,26794.0
+28000002,Rage,spell,2,Epic,19957.0
+28000003,Rocket,spell,6,Rare,9315.0
+28000004,Goblin Barrel,spell,3,Epic,40611.0
+28000005,Freeze,spell,4,Epic,8650.0
+28000006,Mirror,spell,1,Epic,11525.0
+28000007,Lightning,spell,6,Epic,4588.0
+28000008,Zap,spell,2,Common,35484.0
+28000009,Poison,spell,4,Epic,7983.0
+28000010,Graveyard,spell,5,Legendary,4554.0
+28000011,The Log,spell,2,Legendary,81798.0
+28000012,Tornado,spell,3,Epic,9948.0
+28000013,Clone,spell,3,Epic,14585.0
+28000014,Earthquake,spell,3,Rare,1499.0
+28000015,Barbarian Barrel,spell,2,Epic,10870.0
+28000016,Heal Spirit,spell,1,Rare,2096.0
+28000017,Giant Snowball,spell,2,Common,3004.0
+28000018,Royal Delivery,spell,3,Common,1098.0
