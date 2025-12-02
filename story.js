@@ -24,6 +24,7 @@
     { id: "#chart-spooky-town", arenaName: "Spooky Town" },
     { id: "#chart-rascals-hideout", arenaName: "Rascal's Hideout" },
     { id: "#chart-serenity-peak", arenaName: "Serenity Peak" },
+    { id: "#chart-miners-mine", arenaName: "Miner's Mine" },
     { id: "#chart-legendary-arena", arenaName: "Legendary Arena" },
   ];
 
@@ -53,7 +54,7 @@
     // Don’t auto-advance when user is interacting with explorer controls
     const isExplorerActive =
       document
-        .querySelector("#slide-7")
+        .querySelector("#slide-8")
         ?.classList.contains("is-active") || false;
 
     const clickedInsideExplorer =
