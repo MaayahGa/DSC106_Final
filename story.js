@@ -52,10 +52,9 @@
 
   function handleClickToAdvance(event) {
     // Don’t auto-advance when user is interacting with explorer controls
+    const explorerSlideEl = document.querySelector(".slide--explorer");
     const isExplorerActive =
-      document
-        .querySelector("#slide-8")
-        ?.classList.contains("is-active") || false;
+      explorerSlideEl?.classList.contains("is-active") || false;
 
     const clickedInsideExplorer =
       event.target.closest(".explorer-controls") ||
@@ -139,6 +138,8 @@
     );
   }
 
+
+
   function renderArenaChart(containerSelector, arenaName) {
     const container = d3.select(containerSelector);
     if (container.empty()) return;
@@ -148,6 +149,9 @@
       container.text("No data available for this arena yet.");
       return;
     }
+
+    // NEW: sort bars by wins (descending) so tallest is on the left
+    const sortedData = data.slice().sort((a, b) => d3.descending(a.wins, b.wins));
 
     // Clear previous render (for resize)
     container.selectAll("*").remove();
@@ -169,13 +173,13 @@
 
     const x = d3
       .scaleBand()
-      .domain(data.map((d) => d.card_name))
+      .domain(sortedData.map((d) => d.card_name))   // use sorted order
       .range([0, width])
       .padding(0.2);
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.wins) || 1])
+      .domain([0, d3.max(sortedData, (d) => d.wins) || 1])
       .nice()
       .range([height, 0]);
 
@@ -186,7 +190,7 @@
 
     // Bars
     g.selectAll(".bar")
-      .data(data, (d) => d.card_name)
+      .data(sortedData, (d) => d.card_name)
       .join("rect")
       .attr("class", "bar")
       .attr("x", (d) => x(d.card_name))
@@ -211,11 +215,11 @@
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y).ticks(5));
 
-    // Mean lines for each bin
-    const toxicValues = data
+    // Mean lines for each bin (using sortedData is fine – order doesn’t matter)
+    const toxicValues = sortedData
       .filter((d) => d.bin === "toxic_troop")
       .map((d) => d.wins);
-    const spellValues = data
+    const spellValues = sortedData
       .filter((d) => d.bin === "cheap_spell")
       .map((d) => d.wins);
 
@@ -260,7 +264,7 @@
         .text("Cheap spell mean");
     }
 
-    // Simple legend
+    // Simple legend (unchanged)
     const legend = svg
       .append("g")
       .attr("class", "legend")
@@ -293,7 +297,6 @@
       .attr("class", "legend-label")
       .text((d) => d.label);
   }
-
   function renderStoryCharts() {
     STORY_ARENAS.forEach((cfg) => {
       renderArenaChart(cfg.id, cfg.arenaName);

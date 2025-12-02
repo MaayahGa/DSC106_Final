@@ -1,113 +1,197 @@
-const toxicTroops = ["Skeleton Army", "Wizard", "Valkyrie", "Mega Knight"];
-const cheapSpells = ["The Log", "Zap", "Barbarian Barrel"];
+// common.js
+// Shared data loading + helpers for story.js (and later explore.js)
+//
+// CardList.csv columns (from your description):
+//   - card_name: name of the card
+//   - card_type: troop / spell / building
+//   - elixir: elixir cost
+//   - rarity: Common / Rare / Epic / Legendary
+//   - count_0: # wins in Spooky Town
+//   - count_1: # wins in Rascal's Hideout
+//   - count_2: # wins in Serenity Peak
+//   - count_3: # wins in Miner's Mine
+//   - count_4: # wins in Legendary Arena
+//   - overall_count: total # wins across these arenas
+//
+// This file exposes on `window`:
+//   - ARENA_CONFIG: metadata for each arena
+//   - loadCardData(): Promise<cardRows[]>
+//   - getCardBin(cardName): 'toxic_troop' | 'cheap_spell' | 'other'
+//   - getWinsForArena(cardRow, arenaNameOrKey): number
+//   - loadStoryData(): Promise<STORY_CHART_DATA>
+//   - STORY_CHART_DATA: { [arenaName]: [{ card_name, bin, wins, ... }, ...] }
+//
+// Story charts follow your plan: for each arena, bar chart with
+// #wins as y-axis, cards in two bins, and mean lines per bin. :contentReference[oaicite:0]{index=0}
 
-const cardBins = {};
-toxicTroops.forEach(c => cardBins[c] = "Toxic Troop");
-cheapSpells.forEach(c => cardBins[c] = "Cheap Spell");
+(function () {
+  "use strict";
 
-// Map arena div → CSV count column
-const arenaColumnMap = {
-  "chart-spooky-town": "count_0",
-  "chart-rascals-hideout": "count_1",
-  "chart-serenity-peak": "count_2",
-  "chart-miners-mine": "count_3",
-  "chart-legendary-arena": "count_4"
-};
+  // ---------- CONFIG ----------
 
-// Load CSV once
-d3.csv("CardList.csv").then(data => {
-  data.forEach(d => {
-    // Convert numeric fields
-    for (let k of ["count_0","count_1","count_2","count_3","count_4"]) {
-      d[k] = +d[k];
+  const CARD_DATA_PATH = "data/CardList.csv";
+
+  // Bins from your project plan (current version: 4 toxic troops, 2 cheap spells)
+  const TOXIC_TROOPS = [
+    "Skeleton Army",
+    "Wizard",
+    "Valkyrie",
+    "Mega Knight",
+  ];
+
+  const CHEAP_SPELLS = [
+    "The Log",
+    "Zap",
+  ];
+
+  // Union order used for x-axis ordering in the arena charts
+  const BIN_CARD_ORDER = TOXIC_TROOPS.concat(CHEAP_SPELLS);
+
+  // Arena metadata (names MUST match story.html & story.js) :contentReference[oaicite:1]{index=1}
+  const ARENA_CONFIG = [
+    { index: 0, key: "count_0", name: "Spooky Town" },
+    { index: 1, key: "count_1", name: "Rascal's Hideout" },
+    { index: 2, key: "count_2", name: "Serenity Peak" },
+    { index: 3, key: "count_3", name: "Miner's Mine" },
+    { index: 4, key: "count_4", name: "Legendary Arena" },
+  ];
+
+  // ---------- INTERNAL STATE ----------
+
+  let cardDataPromise = null;
+
+  // Lowercased lookup sets for bins
+  const toxicSet = new Set(TOXIC_TROOPS.map((n) => n.toLowerCase()));
+  const cheapSet = new Set(CHEAP_SPELLS.map((n) => n.toLowerCase()));
+
+  // ---------- HELPERS ----------
+
+  function getCardBin(cardName) {
+    const key = (cardName || "").toLowerCase();
+    if (toxicSet.has(key)) return "toxic_troop";
+    if (cheapSet.has(key)) return "cheap_spell";
+    return "other";
+  }
+
+  // Load CardList.csv once, cache the result, annotate rows with bin
+  function loadCardData() {
+    if (!cardDataPromise) {
+      cardDataPromise = d3
+        .csv(CARD_DATA_PATH, d3.autoType)
+        .then((rows) => {
+          rows.forEach((row) => {
+            row.bin = getCardBin(row.card_name);
+          });
+
+          // Expose for explore.js and debugging later
+          window.CARD_DATA = rows;
+          window.ARENA_CONFIG = ARENA_CONFIG;
+          return rows;
+        })
+        .catch((err) => {
+          console.error("Error loading CardList.csv:", err);
+          throw err;
+        });
     }
-  });
+    return cardDataPromise;
+  }
 
-  // Render chart for each arena container
-  d3.selectAll(".chart--arena").each(function() {
-    const container = d3.select(this);
-    const id = container.attr("id");
-    const column = arenaColumnMap[id];
+  /**
+   * Get #wins for a card in a specific arena.
+   * arenaNameOrKey can be:
+   *   - "Spooky Town" (matches ARENA_CONFIG.name)
+   *   - "count_0"     (matches ARENA_CONFIG.key)
+   */
+  function getWinsForArena(cardRow, arenaNameOrKey) {
+    if (!cardRow) return 0;
 
-    if (!column) return; // skip unknown divs
+    let key = arenaNameOrKey;
+    if (!key) return 0;
 
-    renderArenaChart(container, data, column);
-  });
-});
+    // If we were passed an arena NAME, look up its key
+    if (!/^count_/.test(key)) {
+      const arenaMeta = ARENA_CONFIG.find((a) => a.name === key);
+      key = arenaMeta ? arenaMeta.key : null;
+    }
 
+    if (!key) return 0;
 
-// Render one arena's bar chart
-function renderArenaChart(container, data, colName) {
-  // Filter only the cards in the 2 bins
-  const filtered = data.filter(d => cardBins[d["team.card1.name"]]);
+    const value = cardRow[key];
+    if (typeof value === "number" && isFinite(value)) {
+      return value;
+    }
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
 
-  // Aggregate by card for this arena
-  const aggregated = d3.rollups(
-    filtered,
-    v => d3.sum(v, d => d[colName]),
-    d => d["team.card1.name"]
-  ).map(([card, wins]) => ({
-    card,
-    wins,
-    bin: cardBins[card]
-  }));
+  // Build the story chart data:
+  // STORY_CHART_DATA = { [arenaName]: [{ card_name, bin, wins, ... }, ...] }
+  function buildStoryChartData(rows) {
+    const byName = new Map(
+      rows.map((r) => [String(r.card_name || "").toLowerCase(), r])
+    );
 
-  // ---- DRAW THE CHART ----
-  const margin = { top: 20, right: 20, bottom: 70, left: 50 };
-  const width = 500 - margin.left - margin.right;
-  const height = 300 - margin.top - margin.bottom;
+    const storyData = {};
 
-  const svg = container
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+    ARENA_CONFIG.forEach((arena) => {
+      const arenaRows = [];
 
-  const x = d3
-    .scaleBand()
-    .domain(aggregated.map(d => d.card))
-    .range([0, width])
-    .padding(0.2);
+      BIN_CARD_ORDER.forEach((name) => {
+        const rec = byName.get(String(name).toLowerCase()) || null;
+        if (!rec) {
+          // If one of our bin cards is missing from the CSV, just skip it.
+          return;
+        }
 
-  const y = d3
-    .scaleLinear()
-    .domain([0, d3.max(aggregated, d => d.wins)])
-    .nice()
-    .range([height, 0]);
+        const wins = getWinsForArena(rec, arena.key);
 
-  // Bars
-  svg
-    .selectAll("rect")
-    .data(aggregated)
-    .enter()
-    .append("rect")
-    .attr("x", d => x(d.card))
-    .attr("y", d => y(d.wins))
-    .attr("width", x.bandwidth())
-    .attr("height", d => height - y(d.wins))
-    .attr("fill", d => (d.bin === "Toxic Troop" ? "#c0392b" : "#27ae60"));
+        // If you ever add explicit availability flags, you can refine this filter.
+        if (wins <= 0) {
+          // Treat non-positive wins as "not available / not meaningful" in this arena.
+          return;
+        }
 
-  // X-axis
-  svg
-    .append("g")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-0.5em")
-    .attr("dy", "0.15em")
-    .attr("transform", "rotate(-40)");
+        const bin = getCardBin(rec.card_name);
+        if (bin === "other") {
+          // Shouldn't happen for cards in BIN_CARD_ORDER, but be safe.
+          return;
+        }
 
-  // Y-axis
-  svg.append("g").call(d3.axisLeft(y));
+        arenaRows.push({
+          card_name: rec.card_name,
+          bin,
+          wins,
+          arena: arena.name,
+          card_type: rec.card_type,
+          elixir: rec.elixir,
+          rarity: rec.rarity,
+        });
+      });
 
-  // Title (use container’s data-arena attribute)
-  svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", -5)
-    .attr("text-anchor", "middle")
-    .style("font-size", "16px")
-    .text(container.attr("data-arena") + " — Wins by Card");
-}
+      storyData[arena.name] = arenaRows;
+    });
+
+    return storyData;
+  }
+
+  function loadStoryData() {
+    // If we've already built STORY_CHART_DATA once, just reuse it.
+    if (window.STORY_CHART_DATA) {
+      return Promise.resolve(window.STORY_CHART_DATA);
+    }
+
+    return loadCardData().then((rows) => {
+      const storyData = buildStoryChartData(rows);
+      window.STORY_CHART_DATA = storyData;
+      return storyData;
+    });
+  }
+
+  // ---------- EXPOSE GLOBAL API ----------
+
+  window.ARENA_CONFIG = ARENA_CONFIG;
+  window.loadCardData = loadCardData;
+  window.getCardBin = getCardBin;
+  window.getWinsForArena = getWinsForArena;
+  window.loadStoryData = loadStoryData;
+})();
